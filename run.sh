@@ -18,7 +18,7 @@ wget $WGET_FLAGS "https://www.nationstates.net/cgi-bin/api.cgi?region=$region&q=
 
 maxnum=$(grep 'paginate' "nation" | sed 's/">/">\n/g' | sed -nr '/start=/ { s/.*start=([0-9]*)">/\1/; p; }' | sort -n | tail -1)
 
-echo -n 'Throttling download at one page per second: .'
+echo -n 'Throttling download at one page per 6 seconds: .'
 for i in $(seq 30 30 "$maxnum"); do
 	wget $WGET_FLAGS "https://www.nationstates.net/page=deck/nation=$nation?start=$i" "-O-" >> "nation"
 	echo -n '.'
